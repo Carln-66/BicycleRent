@@ -1,4 +1,4 @@
-//对于电车充电的接口
+//interface of electric bike charging
 public interface Charger {
 	public boolean isBatteryFull();
 	public void recharge();

@@ -2,16 +2,19 @@
 public abstract class Bike {
 	protected String serialNumber;
 	protected boolean isRented = false;
+
 	public String getSerialNumber() {
 		return serialNumber;
 	}
+
 	public boolean isRented() {
 		return isRented;
 	}
+
 	public void setRented(boolean isRented) {
 		this.isRented = isRented;
 	}
-	//构造函数
+
 	public Bike(String serialNumber, boolean isRented) {
 		this.serialNumber = serialNumber;
 		this.isRented = isRented;
@@ -26,6 +29,7 @@ public abstract class Bike {
 		result = prime * result + ((serialNumber == null) ? 0 : serialNumber.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -44,5 +48,4 @@ public abstract class Bike {
 			return false;
 		return true;
 	}
-	
 }

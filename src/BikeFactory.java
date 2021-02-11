@@ -1,6 +1,6 @@
-//用于新建车对象的类
+//class is used for create new bike
 public class BikeFactory {
-	//根据不同车类创建车对象
+	//create new bike instance according to different type
 	public static Bike getBike(BikeType type,int number) {
 		if(type == BikeType.ROAD){
 			String serialNumber = "rb"+String.format("%03d", number);

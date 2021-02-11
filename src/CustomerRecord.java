@@ -2,7 +2,7 @@ import java.util.Calendar;
 
 public class CustomerRecord {
 	private Customer customer;
-	private String uniqueNumber;    //客户的编号
+	private String uniqueNumber;    //customer's ID
 	private Calendar recordDate = Calendar.getInstance();
 	private boolean isGoldClass;
 	private static int i=0;

@@ -8,7 +8,7 @@ public class ElectricBike extends Bike implements Charger{
 	public boolean isBatteryFull() {
 		return battery;
 	}
-	//充电
+	//charge
 	@Override
 	public void recharge() {
 		this.battery = true;

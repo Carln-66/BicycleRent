@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99ea1373-afdc-4518-bf46-34b932a777d7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Bike.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bike.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BikeFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BikeFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BikeType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BikeType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Charger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Charger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CustomerRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CustomerRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ElectricBike.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ElectricBike.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RentalCompany.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RentalCompany.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RoadBike.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RoadBike.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,11 +49,25 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\CSC8014\CSC8014CourseWork\src" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\CSC8014\CSC8014CourseWork\src" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="RentalCompany" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="RentalCompany" />
       <module name="CSC8014CourseWork" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -72,11 +93,25 @@
       <workItem from="1612888734206" duration="96000" />
       <workItem from="1612888849946" duration="756000" />
       <workItem from="1612919572681" duration="112000" />
-      <workItem from="1613005520298" duration="299000" />
+      <workItem from="1613005520298" duration="2050000" />
+      <workItem from="1613010407120" duration="5060000" />
+      <workItem from="1613029212681" duration="3425000" />
     </task>
+    <task id="LOCAL-00001" summary="Update">
+      <created>1613005981596</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1613005981596</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update" />
   </component>
 </project>

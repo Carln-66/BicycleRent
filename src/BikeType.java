@@ -1,4 +1,4 @@
-//车类型的枚举
+//enum class of bike type
 public enum BikeType {
 	ROAD,ELECTRIC
 }

@@ -8,13 +8,13 @@ import java.util.Map;
 
 public class RentalCompany implements Rental{
 	private static final int roadBikeNum = 50;
-	private static final int electricBikeNum = 10;     //�常数，公司有的车的数量
-	private static ArrayList<CustomerRecord> recordCustomers = new ArrayList<CustomerRecord>(); //用于存放注册用户的集合
-	private ArrayList<Bike> roadBikes = new ArrayList<Bike>();		//存放租出去的普通自行车
-	private ArrayList<Bike> electricBikes = new ArrayList<Bike>();  //�存放租出去的电瓶车
-	private Map<CustomerRecord,Bike> rentMap = new HashMap<CustomerRecord,Bike>();   //用于将用户与租出去的车绑定
+	private static final int electricBikeNum = 10;     // constant: amount of bikes
+	private static ArrayList<CustomerRecord> recordCustomers = new ArrayList<CustomerRecord>(); //collections which is store customers' information
+	private ArrayList<Bike> roadBikes = new ArrayList<Bike>();		//store road bikes which is already rented
+	private ArrayList<Bike> electricBikes = new ArrayList<Bike>();  //store electric bikes which is already rented
+	private Map<CustomerRecord,Bike> rentMap = new HashMap<CustomerRecord,Bike>();   //bounds customer and their rent bikes
 	
-	//可用车的数量
+	//amount of available bikes
 	@Override
 	public int availableBikes(BikeType type) {
 		if(type.equals(BikeType.ROAD)) {
@@ -23,7 +23,7 @@ public class RentalCompany implements Rental{
 			return electricBikeNum - electricBikes.size();
 		}
 	}
-	//得到所有租出去的车
+	//return all bikes which is rented
 	@Override
 	public List<Bike> getRentedBikes() {
 		List<Bike> allRentedBike = new ArrayList<>();
@@ -31,42 +31,45 @@ public class RentalCompany implements Rental{
 		allRentedBike.addAll(electricBikes);
 		return allRentedBike;
 	}
-	//根据用户得到他租到的车
+
+	//insert customer and return their bikes
 	@Override
 	public Bike getBike(CustomerRecord customerRecord) {
 		return rentMap.get(customerRecord);
 	}
-	//用户租车
+
+	//rent electric bikes
 	@Override
 	public void issueBike(CustomerRecord customerRecord, BikeType type) {
-		//首先判断当前用户是否有租车
+		//determine whether the customer currently is renting a bike
 		if(rentMap.containsKey(customerRecord)) {
-			System.out.println("一人只能租一个车！");
+			System.out.println("You cannot rent more than one bike at a time.");
 			return;
 		}
 		if(type.equals(BikeType.ELECTRIC)) {
-			//判断当前车是否租满
+			//Determine if there are any bikes left
 			if(electricBikes.size() >= electricBikeNum) {
-				System.out.println("租借失败");
+				System.out.println("Sorry, there's no available bikes now.");
 			}
 			Calendar now = Calendar.getInstance();
 			now.add(Calendar.YEAR, -21);
-			//如果小于21岁或者不是goldclass
+			//under 21 or not golden class
 			if(now.before(customerRecord.getBirthday()) || !customerRecord.isGoldClass()) {
-				System.out.println("租借失败");
+				System.out.println("You don't eligible to rent a bike");
 				return;
 			}
-			//租借成功  将车放到集合中,车的编号为第几辆租出去的车
+			//successfully rented  put the bikes into the collection, the serial number is the order of rent
 			Bike electricBike = BikeFactory.getBike(type, electricBikes.size());
 			electricBikes.add(electricBike);
 			rentMap.put(customerRecord, electricBike);
 			
 		}
-		//借的是普通车
+
+		//rent road bikes
 		else {
-			//判断当前车是否租满
+			//determine if a bike is currently available
 			if(roadBikes.size() >= roadBikeNum) {
-				System.out.println("租借失败");
+				System.out.println("Sorry, there's no available bikes now.");
 				return;
 			}
 			Bike roadBike = BikeFactory.getBike(type, roadBikes.size());
@@ -74,31 +77,29 @@ public class RentalCompany implements Rental{
 			rentMap.put(customerRecord, roadBike);
 		}
 	}
-	//终止租车
+	//terminate rental
 	@Override
 	public void terminateRental(CustomerRecord customerRecord) {
-		//得到客户租的那辆车
+		//get the bike
 		Bike bike = getBike(customerRecord);
-		//从对应集合中移除Bike
+		//remove the bike from collection
 		if(bike instanceof RoadBike) {
 			roadBikes.remove(bike);
-			//车子设置为没被租借
+			//set status of the bike is available
 			bike.setRented(false);
 		}
-		//如果是电车
 		else {
 			electricBikes.remove(bike);
-			//车子设置为没被租借
+			//set status of the bike is available
 			bike.setRented(false);
 			((ElectricBike)bike).recharge();
 		}
-		//解除用户与车的关系
 		rentMap.remove(customerRecord);
 	}
 	
 	
 	public static void main(String[] args) {
-		//先新建几个注册客户对象
+		//Creat some new customers
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			CustomerRecord c1 = new CustomerRecord(new Customer("Ann Bnn",sdf.parse("1997-2-4")), false);
@@ -112,36 +113,36 @@ public class RentalCompany implements Rental{
 			recordCustomers.add(c4);
 			recordCustomers.add(c5);
 			
-			//租车
+			//rent bike
 			RentalCompany company = new RentalCompany();
 			company.issueBike(c1, BikeType.ROAD);
 			company.issueBike(c2, BikeType.ELECTRIC);
-			//客户三因为不是gold class所以会租借电车失败
+			//c3 is fail the rent a bike because of not a gold class member
 			company.issueBike(c3, BikeType.ELECTRIC);
-			//客户4未满21，会租借电车失败
+			//c4 is fail to rent a bike because of age under 21
 			company.issueBike(c4, BikeType.ELECTRIC);
 			company.issueBike(c5, BikeType.ROAD);
-			//客户5已经租了一辆车，再租车会导致失败
+			//c5 is fail to rent a bike because of already own a bike
 			company.issueBike(c5, BikeType.ELECTRIC);
 			
-			//查看当前可用普通车数量
-			System.out.println("普通自行车可租数量："+company.availableBikes(BikeType.ROAD));
-			System.out.println("电瓶车可租数量："+company.availableBikes(BikeType.ELECTRIC));
-			//得到当前租出去的自行车
+			//View the number of bikes currently available
+			System.out.println("Rentable road bike number: "+company.availableBikes(BikeType.ROAD));
+			System.out.println("Rentable Electric bike number: "+company.availableBikes(BikeType.ELECTRIC));
+			//view the list of renting bikes
 			List<Bike> rentedBikes = company.getRentedBikes();
 			for(Bike bike : rentedBikes) {
 				System.out.println(bike);
 			}
 			
-			//得到客户c5租到的车
+			//return the bike which is c5 rent
 			Bike c5Bike = company.getBike(c5);
-			System.out.println("客户c5的车是："+c5Bike);
-			//将客户5的租车协议终止
+			System.out.println("Customer c5 is renting: "+c5Bike);
+			//terminate the contract of c5
 			company.terminateRental(c5);
-			System.out.println("客户c5的车是："+company.getBike(c5));
-			//再次查看当前可用车数量
-			System.out.println("普通自行车可租数量："+company.availableBikes(BikeType.ROAD));
-			System.out.println("电瓶车可租数量："+company.availableBikes(BikeType.ELECTRIC));
+			System.out.println("the bike of customer c5 renting is: "+company.getBike(c5));
+			//review the current rentable bikes
+			System.out.println("Amount of rentable road bike is: "+company.availableBikes(BikeType.ROAD));
+			System.out.println("Amount of rentable electric bike is: "+company.availableBikes(BikeType.ELECTRIC));
 			
 		} catch (ParseException e) {
 			e.printStackTrace();

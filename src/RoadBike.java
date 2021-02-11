@@ -8,6 +8,4 @@ public class RoadBike extends Bike {
 	public String toString() {
 		return "RoadBike [serialNumber=" + serialNumber + ", isRented=" + isRented + "]";
 	}
-	
-	
 }
