@@ -1,6 +1,10 @@
 //class is used for create new bike
 public class BikeFactory {
-	//create new bike instance according to different type
+	/**
+	* @Author: Carl
+	* @Date: 2021/2/8 9:02
+	* @Description:
+	*/
 	public static Bike getBike(BikeType type,int number) {
 		if(type == BikeType.ROAD){
 			String serialNumber = "rb"+String.format("%03d", number);

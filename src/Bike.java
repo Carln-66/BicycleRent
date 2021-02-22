@@ -20,7 +20,11 @@ public abstract class Bike {
 		this.isRented = isRented;
 	}
 	
-	
+	/**
+	* @Author: Carl
+	* @Date: 2021/2/18 8:51
+	* @Description: override hashCode() and equals
+	*/
 	@Override
 	public int hashCode() {
 		final int prime = 31;

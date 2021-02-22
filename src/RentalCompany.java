@@ -14,7 +14,11 @@ public class RentalCompany implements Rental{
 	private ArrayList<Bike> electricBikes = new ArrayList<Bike>();  //store electric bikes which is already rented
 	private Map<CustomerRecord,Bike> rentMap = new HashMap<CustomerRecord,Bike>();   //bounds customer and their rent bikes
 	
-	//amount of available bikes
+	/**
+	* @Author: Carl
+	* @Date: 2021/2/8 14:10
+	* @Description: amount of rentable bikes
+	*/
 	@Override
 	public int availableBikes(BikeType type) {
 		if(type.equals(BikeType.ROAD)) {
@@ -23,7 +27,12 @@ public class RentalCompany implements Rental{
 			return electricBikeNum - electricBikes.size();
 		}
 	}
-	//return all bikes which is rented
+
+	/**
+	* @Author: Carl
+	* @Date: 2021/2/9 9:10
+	* @Description: return all bikes which is rented
+	*/
 	@Override
 	public List<Bike> getRentedBikes() {
 		List<Bike> allRentedBike = new ArrayList<>();
@@ -32,44 +41,56 @@ public class RentalCompany implements Rental{
 		return allRentedBike;
 	}
 
-	//insert customer and return their bikes
+	/**
+	* @Author: Carl
+	* @Date: 2021/2/9 9:16
+	* @Description: insert customer and return their bikes
+	*/
 	@Override
 	public Bike getBike(CustomerRecord customerRecord) {
 		return rentMap.get(customerRecord);
 	}
 
-	//rent electric bikes
+
+	/**
+	* @Author: Carl
+	* @Date: 2021/2/9 9:19
+	* @Description: rent electric bikes
+	*/
 	@Override
 	public void issueBike(CustomerRecord customerRecord, BikeType type) {
 		//determine whether the customer currently is renting a bike
 		if(rentMap.containsKey(customerRecord)) {
-			System.out.println("You cannot rent more than one bike at a time.");
+			System.out.println("You cannot rent more than one bike.");
 			return;
 		}
 		if(type.equals(BikeType.ELECTRIC)) {
 			//Determine if there are any bikes left
 			if(electricBikes.size() >= electricBikeNum) {
-				System.out.println("Sorry, there's no available bikes now.");
+				System.out.println("Sorry, there's no rentable bikes now.");
 			}
 			Calendar now = Calendar.getInstance();
 			now.add(Calendar.YEAR, -21);
 			//under 21 or not golden class
 			if(now.before(customerRecord.getBirthday()) || !customerRecord.isGoldClass()) {
-				System.out.println("You don't eligible to rent a bike");
+				System.out.println("You are not eligible to rent a bike");
 				return;
 			}
 			//successfully rented  put the bikes into the collection, the serial number is the order of rent
 			Bike electricBike = BikeFactory.getBike(type, electricBikes.size());
 			electricBikes.add(electricBike);
 			rentMap.put(customerRecord, electricBike);
-			
 		}
 
-		//rent road bikes
+		/**
+		* @Author: Carl
+		* @Date: 2021/2/9 10:12
+		* @Description: rent road bikes
+		*/
 		else {
 			//determine if a bike is currently available
 			if(roadBikes.size() >= roadBikeNum) {
-				System.out.println("Sorry, there's no available bikes now.");
+				System.out.println("Sorry, there's no rentable bikes now.");
 				return;
 			}
 			Bike roadBike = BikeFactory.getBike(type, roadBikes.size());
@@ -77,7 +98,12 @@ public class RentalCompany implements Rental{
 			rentMap.put(customerRecord, roadBike);
 		}
 	}
-	//terminate rental
+
+	/**
+	* @Author: Carl
+	* @Date: 2021/2/9 10:35
+	* @Description: terminate rental
+	*/
 	@Override
 	public void terminateRental(CustomerRecord customerRecord) {
 		//get the bike
@@ -99,7 +125,11 @@ public class RentalCompany implements Rental{
 	
 	
 	public static void main(String[] args) {
-		//Creat some new customers
+		/**
+		* @Author: Carl
+		* @Date: 2021/2/9 11:22
+		* @Description: Creat some new customers
+		*/
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			CustomerRecord c1 = new CustomerRecord(new Customer("Ann Bnn",sdf.parse("1997-2-4")), false);
@@ -128,6 +158,7 @@ public class RentalCompany implements Rental{
 			//View the number of bikes currently available
 			System.out.println("Rentable road bike number: "+company.availableBikes(BikeType.ROAD));
 			System.out.println("Rentable Electric bike number: "+company.availableBikes(BikeType.ELECTRIC));
+
 			//view the list of renting bikes
 			List<Bike> rentedBikes = company.getRentedBikes();
 			for(Bike bike : rentedBikes) {
@@ -147,7 +178,5 @@ public class RentalCompany implements Rental{
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
 	}
-
 }

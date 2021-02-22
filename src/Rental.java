@@ -1,5 +1,9 @@
 import java.util.List;
-//租赁公司所要实现的方法
+/**
+* @Author: Carl
+* @Date: 2021/2/8 8:44
+* @Description: list all methods rental company should include
+*/
 public interface Rental {
 	public int availableBikes(BikeType type);
 	public List<Bike> getRentedBikes();

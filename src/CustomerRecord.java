@@ -6,30 +6,41 @@ public class CustomerRecord {
 	private Calendar recordDate = Calendar.getInstance();
 	private boolean isGoldClass;
 	private static int i=0;
+
+	/**
+	* @Author: Carl
+	* @Date: 2021/2/08 10:11
+	* @Description: record the customer's serial number and is or not a gold class
+	*/
 	public CustomerRecord(Customer customer, boolean isGoldClass) {
 		this.customer = customer;
 		this.isGoldClass = isGoldClass;
 		String[] name = customer.getName().split(" ");
-		this.uniqueNumber = name[0].substring(0,1)+name[1].substring(0,1)+"-"+recordDate.get(Calendar.YEAR)+String.format("%02d", i);
+		this.uniqueNumber = name[0].substring(0, 1)+name[1].substring(0, 1)+"-"+recordDate.get(Calendar.YEAR)+String.format("%02d", i);
 		i++;
 		if(i>99) {
 			i=0;
 		}
 	}
+
 	public String getCustomerFullName() {
 		return customer.getName();
 	}
+
 	public Calendar getBirthday() {
 		Calendar birth = Calendar.getInstance();
 		birth.setTime(customer.getBirthday());
 		return birth;
 	}
+
 	public Calendar getRecordDate() {
 		return recordDate;
 	}
+
 	public boolean isGoldClass() {
 		return isGoldClass;
 	}
+
 	@Override
 	public String toString() {
 		return "CustomerRecord [customer=" + customer + ", uniqueNumber=" + uniqueNumber + ", recordDate=" + recordDate
